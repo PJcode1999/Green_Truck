@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %} 
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% block content %}
+<div class="bg-warning">
+  <div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav class="d-flex">
+      <h6 class="mb-0">
+        <a href="{% url 'home' %}" class="text-white-50">Home</a>
+        <span class="text-white-50 mx-2"> > </span>
+        <a href="" class="text-white"><u>Log In</u></a>
+      </h6>
+    </nav>
+    <!-- Breadcrumb -->
+  </div>
+</div>
+<div class="d-flex justify-content-center align-items-center container">
+  <div class="w-50 mb-5 mt-3">
+    <!-- Pills navs -->
+    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+      <li class="nav-item" role="presentation">
+        {% comment %} <a class="nav-link fs-6 active bg-warning text-white" href="{% url 'accounts:login' %}" role="tab" >Login</a> {% endcomment %}
+      </li>
+      <li class="nav-item" role="presentation">
+        {% comment %} <a class="nav-link fs-6 bg-white text-black" href="{% url 'accounts:signup' %}" role="tab" >Sign Up</a> {% endcomment %}
+      </li>
+    </ul>
+    <!-- Pills navs -->
+    <form class="form card py-5 px-5 bg-white" role="form" method="post" >
+      <h5 class="text-center fs-2 mb-5">Log in</h5>
+      {% csrf_token %}
+      {% bootstrap_form form layout='horizontal' %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary btn-block mt-3 px-5 fs-6 ">Sign in</button>
+      {% endbuttons %}
+    </form>
+  </div>
+</div>
+  <!-- Pills content -->
+{% endblock content %}

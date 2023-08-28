@@ -1,0 +1,137 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section>
+	<div class="bg-white shadow">
+		<div class="container py-4">
+			<!-- Breadcrumb -->
+			<nav class="d-flex">
+				<h6 class="mb-0">
+					<a href="{% url 'home' %}" class="text-black-50">Home</a>
+					<span class="text-black-50 mx-2"> > </span>
+					<a href="" class="text-warning"><u>My Cart</u></a>
+				</h6>
+			</nav>
+			<!-- Breadcrumb -->
+		</div>
+	</div>
+</section>
+<section class="container mt-5 table-responsive">
+	<table class="text-center table bg-white">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Product Id</th>
+				<th scope="col">Product</th>
+				<th scope="col">Name</th>
+				<th scope="col">Price</th>
+				<th scope="col">Quantity</th>
+				<th scope="col">Total</th>
+				<th scope="col">Remove Product</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% if products %}
+				{% for cart in products %}
+				<td scope="row">
+					{{ cart.product.id|add:1000 }}
+				</td>
+
+				<td>
+					<img src="{{ cart.product.photo.url }}" alt="" style="width: 50px; height: 50px"
+						class="rounded-circle" />
+				</td>
+
+				<td>
+					<p class="fw-bold mb-0">{{ cart.product.name }}</p>
+				</td>
+
+				<td>
+					₹ {{ cart.product.price }}
+				</td>
+				<td>
+					<div class="d-flex align-items-center justify-content-between">
+						<a href="{% url 'cart:add_to_cart' cart.product.id %}"><i
+								class="fa fa-plus-square fs-4"></i></a>
+						<b>{{ cart.quantity }}</b>
+						<a href="{% url 'cart:decrease_quantity' cart.id %}"><i
+								class="fas fa-minus-square fs-4"></i></a>
+					</div>
+				</td>
+
+				<td>
+					₹ {{ cart.price}}
+				</td>
+				<td>
+					<a class="link-dark rounded btn-outline-danger" href="{% url 'cart:remove_from_cart' cart.id %}"><i
+							class="bi bi-x-lg" aria-hidden="true"></i></a>
+				</td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1 class="text-center p-5 my-5">There is No Product Here!</h1>
+			{% endif %}
+		</tbody>
+	</table>
+	<div class="row justify-content-end mb-5 bg-light">
+		<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+			<div class="cart-total mb-3">
+				<h3>Coupon Code</h3>
+				<p>Enter your coupon code if you have one</p>
+				<form action="#" class="info">
+					<div class="form-group">
+						<label for="">Coupon code</label>
+						<input type="text" class="form-control text-left px-3" placeholder="">
+					</div>
+				</form>
+			</div>
+			<p><a href="{% url 'cart:checkout' %}" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+		</div>
+		<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+			<div class="cart-total mb-3">
+				<h3>Estimate shipping and tax</h3>
+				<p>Enter your destination to get a shipping estimate</p>
+				<form action="#" class="info">
+					<div class="form-group">
+						<label for="">Country</label>
+						<input type="text" class="form-control text-left px-3" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="country">State/Province</label>
+						<input type="text" class="form-control text-left px-3" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="country">Zip/Postal Code</label>
+						<input type="text" class="form-control text-left px-3" placeholder="">
+					</div>
+				</form> 
+			</div>
+			<p><a href="{% url 'cart:checkout' %}" class="btn btn-primary py-3 px-4">Estimate</a></p>
+		</div>
+		<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+			<div class="cart-total mb-3">
+				<h3>Cart Totals</h3>
+				<p class="d-flex">
+					<span>Subtotal: ₹ {{ subtotal }}0</span>
+				</p>
+				<p class="d-flex">
+					<span>Delivery: ₹ {{ delivery_charges }} 
+					{% if delivery_charges == 0 %}<strong> Free Delivery</strong>{% endif %}
+				</span>
+				</p>
+				<p class="d-flex">
+					<span>Discount: ₹ {{ total_discount }} OFF </span>
+				</p>
+				<hr>
+				<p class="d-flex total-price">
+					<span>Total: ₹ {{ total_bill }}0</span>
+				</p>
+			</div>
+			<p><a href="{% url 'cart:checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+		</div>
+	</div>
+	</div>
+</section>
+{% endblock %}

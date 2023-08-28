@@ -1,0 +1,127 @@
+{% load static %}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+  />  
+  <!-- Favicons -->
+  <link type="static/png" sizes="64x64" rel="icon" href="/static/icons8-vegetables-64.png">
+  <!-- Bootstrap CSS -->
+  
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kotta+One&family=Tourney:wght@300&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    .ribbon1 {
+      position: absolute;
+      top: -6.1px;
+      right: 10px;
+    }
+    .ribbon1:after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 30.5px solid transparent;
+      border-right: 30.5px solid transparent;
+      border-top: 10px solid #ffc107;
+      right: 0px;
+    }
+    .ribbon1 span {
+      position: relative;
+      display: block;
+      text-align: center;
+      background: #ffc107;
+      font-size: 12px;
+      line-height: 1;
+      padding: 8px 2px 2px;
+      border-top-right-radius: 8px;
+      width: 60px;
+    }
+    .ribbon1 span:before, .ribbon1 span:after {
+      position: absolute;
+      content: "";
+    }
+    .ribbon1 span:before {
+     height: 6px;
+     width: 6px;
+     left: -4px;
+     top: 0;
+     background: #ffc107;
+    }
+    .ribbon1 span:after {
+     height: 6px;
+     width: 8px;
+     left: -8px;
+     top: 0;
+     border-radius: 8px 8px 0 0;
+     background: #906C00;
+    }
+    .scrollhide::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .imgoverlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      background-color: rgba(0,0,0, 0.5);
+      color: white;
+      transition: .5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .card:hover .imgoverlay {
+      opacity: 1;
+    }
+
+  </style>
+
+  <!--  Title -->
+  <title>All Vegitables-Green Truck!</title>
+</head>

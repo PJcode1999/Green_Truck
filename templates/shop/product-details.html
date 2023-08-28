@@ -1,0 +1,129 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="bg-white shadow">
+  <div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav class="d-flex">
+      <h6 class="mb-0">
+        <a href="{% url 'home' %}" class="text-black-50">Home</a>
+        <span class="text-black-50 mx-2"> > </span>
+        <a href="{% url 'shop:shop' %}" class="text-black"><u>shop</u></a>
+        <span class="text-black-50 mx-2"> > </span>
+        <a href="" class="text-warning"><u>{{ product.name }}</u></a>
+      </h6>
+    </nav>
+    <!-- Breadcrumb -->
+  </div>
+</div>
+    
+    <!-- content -->
+<section class="py-5">
+    <div class="container">
+        {% if product in related_products %}
+        <div class="row gx-5">
+            <aside class="col-lg-6">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center bg-white text-black font-weight-bold">
+                    <img style="max-width: 75%; max-height: 75%; margin: auto;" class="rounded-4 fit" src="{{ product.photo.url }}"/>
+                </div>
+            </aside>
+            <main class="col-lg-6">
+                <div class="ps-lg-3">
+                    <h4 class="title text-dark">
+                        {{ product.name }}
+                    </h4>
+                    <div class="d-flex flex-row my-3">
+                        <div class="text-warning mb-1 me-2">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fas fa-star-half-alt"></i>
+                          <span class="ms-1">4.5</span>
+                        </div>
+                        <span class="text-muted"><i class="fas fa-shopping-bag fa-sm mx-1"></i>154 orders</span>
+                        <span class="text-success ms-2">In stock</span>
+                    </div>
+                    <div class="mb-3">
+                        <span class="h5">₹ {{ product.price }}.00</span>
+                        <span class="text-muted">/{{ product.quantity }}kg</span>
+                    </div>
+                    <p>
+                        category: {{ product.category }}
+                    </p>
+                    <span class="badge rounded-pill text-black bg-warning ">{{ product.discount }} % OFF</span>
+                    <hr />
+
+                    <div class="row mb-4">
+                        <!-- col.// -->
+                        <div class="col-md-4 col-6 mb-3">
+                            <label class="mb-2 d-block">Quantity</label>
+                            <div class="input-group mb-3" style="width: 170px;">
+                              <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                              <input type="text" class="form-control text-center border border-secondary" placeholder="14" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                              <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                                <i class="fas fa-plus"></i>
+                              </button>
+                            </div>
+                        </div>
+                      </div>
+                    <a href="#" class="btn btn-warning shadow-1"> Buy now </a>
+                    <a href="#" class="btn btn-primary shadow-1"> <i class="me-1 fa fa-shopping-bag"></i> Add to cart </a>
+                    <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                </div>
+            </main>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<hr/>
+  <!-- Related Products -->
+<section class="ftco-section">
+	<div class="container">
+		<div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+            	<span class="subheading">Products</span>
+              <h2 class="mb-4">Related Products</h2>
+            </div>
+        </div>
+	</div>
+    
+	<div class="container">
+        <div class="row">
+          {% if related_products %}
+            {% for category_product in related_products %}
+            <div class="col-sm-3 pb-5">
+              <div class="card hover-shadow text-center font-weight-bold" style="height:400px; width:250px">
+                    <span class="ribbon1"><span>{{ category_product.discount }} %</span></span>
+                <a href="{{ category_product.id }}">
+                  <img class="card-img-top" style="height:200px; width:200px" src="{{ category_product.photo.url }}" alt="category_product-photo">
+                </a>
+                <div class="card-body text-warning">
+                  <small class="text-muted">{{ category_product.quantity }}</small>
+                  <h5><a class="text-black link-warning " href="{{ category_product.id }}">{{ category_product.name }}</a></h5>
+                  category: <a class="text-black link-warning"href="{{ category.name }}">{{ category_product.category }}</a>
+                  <h5>₹ {{ category_product.price }}/{{ category_product.quantity }}</h5>
+                </div>
+                <div class="mb-3">
+                    <button 
+                      class="btn text-black btn-floating btn-lg mr-4 ml-4"
+                      <a class="link-warning" href="#"><i class="bi bi-bag-fill "></i></a>
+                    </button>
+                    <button 
+                      class="btn text-black btn-floating btn-lg mr-4 ml-4"
+                      role="link"
+                      <a class="link-warning" href="#"><i class="bi bi-heart"></i></a>
+                    </button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          {% else %}
+            <p>There is No Product Here!</p>
+          {% endif %}
+        </div>
+	</div>
+</section>
+{% endblock %}

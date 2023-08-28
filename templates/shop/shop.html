@@ -1,0 +1,174 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="bg-white shadow">
+  <div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav class="d-flex">
+      <h6 class="mb-0">
+        <a href="{% url 'home' %}" class="text-black-50">Home</a>
+        <span class="text-black-50 mx-2"> > </span>
+        <a href="" class="text-warning"><u>shop</u></a>
+      </h6>
+    </nav>
+    <!-- Breadcrumb -->
+  </div>
+</div>
+<!-- Alert Message -->
+{% for message in messages %}
+<div style="position: absolute; top: 80px; right: 50px;">
+  <div class="alert alert-dismissible fade show" role="alert" style="position: relative; ">
+    <strong><i class="bi bi-check2-square"></i></strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+{% endfor %}
+<!-- Alert Message -->
+
+  <section class="section">
+    <!-- Nav Tab of shop -->      
+    <nav>
+          <ul class="nav nav-tabs mt-4 mb-3 align-items-center justify-content-center">
+              <li><a 
+                {% if request.path == "/shop/" %}
+                  class="nav-item text-white fs-6 bg-warning px-4 mx-3 nav-link active"
+                {% else %}
+                  class="nav-item text-black fs-6 bg-light px-4 mx-3 nav-link"
+                {% endif %}
+                  href="{% url 'shop:shop' %}"
+                >All</a><hr/>
+              </li>
+              {% for category in category_list %}
+              <li>
+                <a 
+                  {% if category.name in request.path %}
+                    class="nav-item text-white fs-6 bg-warning px-4 mx-3 nav-link active"
+                  {% else %}
+                    class="nav-item text-black fs-6 bg-light px-4 mx-3 nav-link"
+                  {% endif %}
+                    href="{{ category.name }}"
+                  >
+                  {{ category.name }}
+                </a><hr/>
+              </li>   
+            {% endfor %}
+          </ul>
+    </nav>
+    <!-- Nav Tab for shop -->
+    <!-- shop -->
+    <div class="tab-content container" id="nav-tabContent">
+      <div class="container">
+        <div class="row">
+          {% if product_list %}
+          {% for product in product_list %}
+            <div class="col-3 pb-5">
+              <div class="card hover-shadow text-center " style="height:370px; width:250px">
+                    <span class="ribbon1"><span>{{ product.discount }} %</span></span>
+                <a href="shop/{{ product.id }}">
+                  <img class="card-img-top" style="height:200px; width:200px" src="{{ product.photo.url }}" alt="product-photo">
+                </a>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between small mb-0">
+                    {% if product.in_stock is True %}
+                      <p><b><a href="{{ product.category }}" class="text-black">
+                        {{ product.category }}
+                      </a></b></p>
+                      <p><b class="text-black">In stock</b></p>
+                    {% else %}
+                        <p class="small text-muted">{{ product.category }}</p>
+                        <p class="small text-muted">Out of stock</p>
+                    {% endif %}
+                  </div>
+                
+                  <div class="d-flex justify-content-between mb-0">
+                    <p class="mb-0"><b>{{ product.name }}</p></b>
+                    <p class="text-black mb-0"><b>₹ {{product.price}}/{{ product.quantity }}</p></b>
+                  </div>
+                  <hr/>
+                  {% for cart_item in products %}
+                  {% if cart_item.product.id == product.id %}
+
+                  <a  class="mb-0 link-dark" href="{% url 'cart:remove_from_cart' cart_item.product.id %}">
+                    Remove
+                  </a>
+                  {% endif %}
+                  {% endfor %}
+                  <div class="d-flex justify-content-center mb-0">
+                    <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center mr-3 ml-3" style="width: 35px; height: 35px;">
+                      <a  class="mb-0 link-dark" href="{% url 'cart:add_to_cart' product.id %}">
+                        <i class="bi bi-bag-plus-fill"></i>
+                      </a>
+                    </div>
+                    <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center mr-3 ml-3" style="width: 35px; height: 35px;">
+                      <a class="mb-0 link-dark" href="#">
+                        <i class="bi bi-heart-fill"></i>
+                      </a> 
+                    </div>
+                  </div>
+                </div>                
+              </div>
+            </div>
+            {% endfor %}
+          {% else %}
+            <h1 class="text-center p-5 my-5">There is No Product Here!</h1>
+          {% endif %}
+        </div>
+	    </div>
+    </div>
+  </section>
+<section class="container bg-white mb-5 ">
+      <div class="row px-4 py-5 text-black">        
+        
+        <div class="col-lg-3 border-warning border-end border-start">
+          <div class="row">
+            <div class="col-lg-2">
+              <i class="fas fa-tractor fa-2xl text-warning"></i>
+            </div>
+            <div class="col-lg">
+              <h4 class="fw-bold">Farm Fresh</h4>
+              <p>100% farm fresh natural to your doorstep in 12 HOURS.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 border-warning border-end">
+          <div class="row">
+            <div class="col-lg-2">
+              <i class="fas fa-hand-sparkles fa-2xl text-warning"></i>
+            </div>
+            <div class="col-lg">
+              <h4 class="fw-bold">Hand Picked Quality</h4>
+              <p>We ensure the product quality that is our main goal</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 border-warning border-end">
+          <div class="row">
+            <div class="col-lg-2">
+              <i class="fa-solid fa-leaf fa-2xl text-warning"></i>
+            </div>
+            <div class="col-lg">
+              <h4 class="fw-bold">Best Price</h4>
+              <p>We provide you the best price & quality in Town</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 border-warning border-end">
+          <div class="row">
+            <div class="col-lg-2">
+              <i class="fa-solid fa-truck-fast fa-2xl text-warning"></i>
+            </div>
+            <div class="col-lg">
+              <h4 class="fw-bold">Free home delivery</h4>
+              <p>You will get free home delivery on order above 300</p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+</section>
+{% endblock %}

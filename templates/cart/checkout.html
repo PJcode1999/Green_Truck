@@ -1,0 +1,179 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<section>
+	<div class="bg-white shadow mb-5">
+		<div class="container py-4">
+			<!-- Breadcrumb -->
+			<nav class="d-flex">
+				<h6 class="mb-0">
+					<a href="{% url 'home' %}" class="text-black-50">Home</a>
+					<span class="text-black-50 mx-2"> > </span>
+					<a href="{% url 'cart:cart' %}" class="text-black-50">My Cart</a>
+					<span class="text-black-50 mx-2"> > </span>
+					<a href="#" class="text-warning"><u>Checkout</u></a>
+				</h6>
+			</nav>
+			<!-- Breadcrumb -->
+		</div>
+	</div>
+</section>
+
+<section>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-xl-7">
+				<div>
+					{% if messages %}
+						{% for message in messages %}
+							<span{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: green">{{ message }}</span>
+						{% endfor %}
+					{% endif %}
+				</div>
+				<h3 class="mb-4 d-flex align-items-center justify-content-center">Shipping Address</h3>
+				<form class="form" method="post">
+					{% csrf_token %}
+					<div class="row align-items-end">
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.first_name }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.last_name }}
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-12">
+							<div class="form-group ">
+								{{ form.state }}
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.address_1 }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.address_2 }}
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.city }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.phone_number }}
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.postpin }}
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group ">
+								{{ form.email }}
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-md-12">
+							<div class="form-group mt-4">
+								<input type="submit" value="submit" class="text-black small rounded btn-outline-success"/>
+							</div>
+						</div>
+					</div>
+				</form><!-- END -->
+			</div>
+			<div class="col-xl-5">
+				<div class="row mt-5 pt-3">
+					<div class="col-md-12 d-flex mb-5">
+						<div class="cart-detail cart-total p-3 p-md-4">
+							<h3 class="billing-heading mb-4">Cart Total</h3>
+							<p class="d-flex">
+								<span>Subtotal</span>
+								<span>₹ {{ subtotal }}</span>
+							</p>
+							<p class="d-flex">
+								<span>Delivery</span>
+								<span>₹ {{ delivery_charges }}</span>
+							</p>
+							<p class="d-flex">
+								<span>Discount</span>
+								<span>₹ {{ total_discount }}</span>
+							</p>
+							<hr>
+							<p class="d-flex total-price">
+								<span>Total</span>
+								<span>₹ {{ total_bill }}</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="cart-detail p-3 p-md-4">
+							<h3 class="billing-heading mb-4">Payment Method</h3>
+							<div class="form-group ">
+								<div class="col-md-12">
+									<div class="radio">
+										<label><input type="radio" name="optradio" class="mr-2"> Direct Bank
+											Tranfer</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="col-md-12">
+									<div class="radio">
+										<label><input type="radio" name="optradio" class="mr-2"> Check Payment</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="col-md-12">
+									<div class="radio">
+										<label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="col-md-12">
+									<div class="checkbox">
+										<label><input type="checkbox" value="" class="mr-2"> I have read and accept the
+											terms and conditions</label>
+									</div>
+								</div>
+							</div>
+							<p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
+						</div>
+					</div>
+				</div>
+			</div> <!-- .col-md-8 -->
+		</div>
+	</div>
+</section> <!-- .section -->
+
+<section class=" ftco-no-pt ftco-no-pb py-5 bg-light">
+	<div class="container py-4">
+		<div class="row d-flex justify-content-center py-5">
+			<div class="col-md-6">
+				<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
+				<span>Get e-mail updates about our latest shops and special offers</span>
+			</div>
+			<div class="col-md-6 d-flex align-items-center">
+				<form action="#" class="subscribe-form">
+					<div class="form-group  d-flex">
+						<input type="text" class="form-control" placeholder="Enter email address">
+						<input type="submit" value="Subscribe" class="submit px-3">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
